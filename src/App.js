@@ -1,27 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SelectionPage from "./pages/SelectionPage";
-import ResultPage from "./pages/ResultPage";
+import ThankYouPage from "./pages/ThankYouPage";
 
-const App = () => {
-  const [scores, setScores] = useState(null);
-
-  const handleSubmission = (selectedScores) => {
-    setScores(selectedScores);
-  };
-
-  const handleReset = () => {
-    setScores(null);
-  };
-
+function App() {
   return (
-    <div>
-      {scores ? (
-        <ResultPage scores={scores} onReset={handleReset} />
-      ) : (
-        <SelectionPage onSubmit={handleSubmission} />
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SelectionPage />} />
+        <Route path="/thank-you" element={<ThankYouPage />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
