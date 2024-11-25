@@ -36,3 +36,38 @@ h1 {
 .submit-button:hover {
   background-color: #0056b3;
 }
+
+.input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensure the inputs align across the container */
+  max-width: 600px; /* Adjust width as necessary */
+}
+
+.input-left,
+.input-right {
+  width: 45%; /* Allocate space to each input */
+}
+
+.input-left label,
+.input-right label {
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+  font-weight: bold;
+}
+
+input {
+  padding: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}

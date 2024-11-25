@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ScoreSelector from "../components/ScoreSelector";
 import "../styles/SelectionPage.css";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const factors = [
   {
@@ -56,6 +57,7 @@ const SelectionPage = () => {
   const [scores, setScores] = useState({});
   const [participantNumber, setParticipantNumber] = useState("");
   const [taskNumber, setTaskNumber] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleScoreChange = (factor, score) => {
     setScores((prev) => ({ ...prev, [factor]: score }));
@@ -79,65 +81,84 @@ const SelectionPage = () => {
     };
 
     try {
+      setLoading(true);
       const response = await fetch(
         "https://script.google.com/macros/s/AKfycbzBJBbBohgQESc0qlBRd_9cLstho8E1UR39l_xLsS0aFsKxnCyilelXPVKNRZLHbNrG/exec",
         {
           method: "POST",
-          mode: "no-cors", // Important for no-CORS requests
+          mode: "no-cors",
           headers: {
-            "Content-Type": "application/json", // Content-Type headers may be ignored in no-cors mode
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(payload),
         }
       );
 
-      // Note: In no-cors mode, response.ok and response.json() won't work
       setScores({});
+      setLoading(false);
       navigate("/thank-you", { replace: true });
     } catch (error) {
+      setLoading(false);
       console.error("Error submitting data:", error);
       alert("Failed to submit results. Check the console for details.");
     }
   };
 
   return (
-    <div className="selection-page">
-      <h1>NASA TLX Evaluation</h1>
-      <p>
-        Please rate the following factors based on your experience during the
-        task.
-      </p>
-      {factors.map(({ name, question, leftLabel, rightLabel, direction }) => (
-        <div key={name} className="factor-section">
-          <h3>{question}</h3>
-          <ScoreSelector
-            factor={name}
-            leftLabel={leftLabel}
-            rightLabel={rightLabel}
-            direction={direction}
-            onChange={handleScoreChange}
-          />
+    <div>
+      {loading ? (
+        <LoadingSpinner text="Submitting response" />
+      ) : (
+        <div className="selection-page">
+          <h1>NASA TLX Evaluation</h1>
+          <div className="input-section">
+            <div className="input-container">
+              <div className="input-left">
+                <label>
+                  Participant Number:
+                  <input
+                    type="text"
+                    value={participantNumber}
+                    onChange={(e) => setParticipantNumber(e.target.value)}
+                  />
+                </label>
+              </div>
+              <div className="input-right">
+                <label>
+                  Task Number:
+                  <input
+                    type="text"
+                    value={taskNumber}
+                    onChange={(e) => setTaskNumber(e.target.value)}
+                  />
+                </label>
+              </div>
+            </div>
+          </div>
+          <p>
+            Please rate the following factors based on your experience during
+            the task.
+          </p>
+          {factors.map(
+            ({ name, question, leftLabel, rightLabel, direction }) => (
+              <div key={name} className="factor-section">
+                <h3>{question}</h3>
+                <ScoreSelector
+                  factor={name}
+                  leftLabel={leftLabel}
+                  rightLabel={rightLabel}
+                  direction={direction}
+                  onChange={handleScoreChange}
+                />
+              </div>
+            )
+          )}
+
+          <button className="submit-button" onClick={handleSubmit}>
+            Submit
+          </button>
         </div>
-      ))}
-      <div className="input-section">
-        <label>
-          Participant Number:
-          <input
-            type="text"
-            value={participantNumber}
-            onChange={(e) => setParticipantNumber(e.target.value)}
-          />
-        </label>
-        <label>
-          Task Number:
-          <input
-            type="text"
-            value={taskNumber}
-            onChange={(e) => setTaskNumber(e.target.value)}
-          />
-        </label>
-      </div>
-      <button onClick={handleSubmit}>Submit</button>
+      )}
     </div>
   );
 };
