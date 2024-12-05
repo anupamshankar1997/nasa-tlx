@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.94856133.css",
-    "main.js": "/static/js/main.70b85cd7.js",
-    "static/js/453.fcd00f0e.chunk.js": "/static/js/453.fcd00f0e.chunk.js",
-    "index.html": "/index.html",
-    "main.94856133.css.map": "/static/css/main.94856133.css.map",
-    "main.70b85cd7.js.map": "/static/js/main.70b85cd7.js.map",
-    "453.fcd00f0e.chunk.js.map": "/static/js/453.fcd00f0e.chunk.js.map"
+    "main.css": "/nasa-tlx/static/css/main.94856133.css",
+    "main.js": "/nasa-tlx/static/js/main.d583c3e2.js",
+    "static/js/453.fcd00f0e.chunk.js": "/nasa-tlx/static/js/453.fcd00f0e.chunk.js",
+    "index.html": "/nasa-tlx/index.html",
+    "main.94856133.css.map": "/nasa-tlx/static/css/main.94856133.css.map",
+    "main.d583c3e2.js.map": "/nasa-tlx/static/js/main.d583c3e2.js.map",
+    "453.fcd00f0e.chunk.js.map": "/nasa-tlx/static/js/453.fcd00f0e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.94856133.css",
-    "static/js/main.70b85cd7.js"
+    "static/js/main.d583c3e2.js"
   ]
 }
