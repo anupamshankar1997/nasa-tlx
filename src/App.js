@@ -7,7 +7,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SelectionPage />} />
+        <Route path="/nasa-tlx" element={<SelectionPage />} />
         <Route path="/thank-you" element={<ThankYouPage />} />
       </Routes>
     </Router>
