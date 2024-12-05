@@ -18,7 +18,7 @@ const ThankYouPage = () => {
           fontSize: "14px",
           fontWeight: "bold",
         }}
-        onClick={() => navigate("/nasa-tlx", { replace: true })}
+        onClick={() => navigate("/", { replace: true })}
       >
         Start Over
       </button>
